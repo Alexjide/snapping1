@@ -23,6 +23,8 @@
 <button id="summon100Button">100개 소환</button><br>
 <div class="textContainer">
     <button id="resetButton">다시 시작하기</button><br>
+    <label for="backgroundColorPicker">배경색 선택:</label>
+    <input type="color" id="backgroundColorPicker" name="background-color">
 </div>
 <div class="textContainer">
     <label for="speedControl">이동 속도 (기준):</label>
@@ -126,7 +128,9 @@ document.getElementById('summon100Button').addEventListener('click', function() 
     }
 });
 
-
+document.getElementById('backgroundColorPicker').addEventListener('input', function() {
+    document.body.style.backgroundColor = this.value;
+});
 function adjustImageSizeAndPosition(img) {
     const sizePercentage = document.getElementById('sizeControl').value;
     img.style.width = `${sizePercentage}%`;
