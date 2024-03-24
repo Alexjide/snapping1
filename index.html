@@ -37,6 +37,34 @@
         margin-right: 10px; /* 라벨과 컨트롤 사이의 간격 조정 */
         font-size: 14px; /* 라벨의 폰트 크기 조정 */
     }
+    @media screen and (max-width: 768px) {
+        .controlsContainer {
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .controlItem {
+            width: 100%; /* 모바일에서는 너비를 100%로 설정 */
+            margin: 10px 0;
+        }
+        label {
+            margin-bottom: 4px; /* 레이블과 컨트롤 사이의 간격 */
+        }
+        /* ... 추가적인 모바일 스타일 ... */
+    }
+
+    /* 데스크톱 뷰 스타일 */
+    @media screen and (min-width: 769px) {
+        .controlsContainer {
+            flex-direction: row; /* 가로로 요소들을 배치 */
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+        .controlItem {
+            margin: 0 10px; /* 가로 마진을 적절히 설정 */
+        }
+        /* ... 추가적인 데스크톱 스타일 ... */
+    }
     </style>
 </head>
 <body>
