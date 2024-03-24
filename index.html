@@ -23,10 +23,16 @@
         }
         .movableImage {
             position: absolute;
-            max-width: 500px; /* 이미지 최대 크기 제한 */
-            max-height: 500px; /* 이미지 최대 높이 제한 */
+            max-width: 500px; /* 이미지 최대 너비 설정 */
+            max-height: 500px; /* 이미지 최대 높이 설정 */
+            min-width: 10px; /* 이미지 최소 너비 설정 */
+            min-height: 10px; /* 이미지 최소 높이 설정 */
+            width: auto; /* 너비를 auto로 설정하여 비율 유지 */
+            height: auto; /* 높이를 auto로 설정하여 비율 유지 */
+            object-fit: contain; /* 이미지가 비율을 유지하면서 요소 안에 들어가도록 설정 */
             transition: transform 0.5s ease-in-out;
         }
+        
         button, input[type="file"], input[type="color"], input[type="range"] {
             padding: 5px 10px;
             margin: 0 5px;
