@@ -95,12 +95,20 @@
         <!-- 컨트롤 요소들 ... -->
     
     <div class="controlsContainer">
-        <input type="file" id="imageInput" accept="image/*">
+        
+        <div class="fileUploadInfo">
+            <label for="imageInput">이미지 업로드 :</label>
+            <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif">
+            <small>지원되는 형식: JPG, PNG, GIF</small>
+        </div>
+        
         <button id="summonButton">소환</button>
         <button id="summon100Button">100개 소환</button>
         <button id="resetButton">다시 시작하기</button>
-        <input type="color" id="backgroundColorPicker" name="background-color">
-        
+        <div class="colorPickerInfo">
+            <label for="backgroundColorPicker">배경색 지정:</label>
+            <input type="color" id="backgroundColorPicker" name="background-color">
+        </div>
         <!-- 속도 조절 라벨과 입력 요소 추가 -->
         <label for="speedControl">이동 속도 조절:</label>
         <input type="range" id="speedControl" min="0.1" max="2" step="0.1" value="0.5">
