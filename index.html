@@ -5,35 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이미지 소환 및 다시 시작하기</title>
     <style>
+        body {
+            margin: 0;
+            padding-top: 70px; /* 컨트롤러 높이에 맞게 조정 */
+        }
+        .controlsContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            z-index: 10;
+        }
         .movableImage {
             position: absolute;
+            max-width: 500px; /* 이미지 최대 크기 제한 */
+            max-height: 500px; /* 이미지 최대 높이 제한 */
             transition: transform 0.5s ease-in-out;
         }
-        .textContainer {
-            display: inline-block;
+        button, input[type="file"], input[type="color"], input[type="range"] {
+            padding: 5px 10px;
+            margin: 0 5px;
+            font-size: 16px;
         }
+         /* 기존 스타일에 추가 */
+    .controlsContainer label {
+        margin-right: 10px; /* 라벨과 컨트롤 사이의 간격 조정 */
+        font-size: 14px; /* 라벨의 폰트 크기 조정 */
+    }
     </style>
 </head>
 <body>
 
-<input type="file" id="imageInput" accept="image/*"><br>
-<div class="textContainer">
-    <button id="summonButton">소환</button>
-</div>
-<button id="summon100Button">100개 소환</button><br>
-<div class="textContainer">
-    <button id="resetButton">다시 시작하기</button><br>
-    <label for="backgroundColorPicker">배경색 선택:</label>
-    <input type="color" id="backgroundColorPicker" name="background-color">
-</div>
-<div class="textContainer">
-    <label for="speedControl">이동 속도 (기준):</label>
-    <input type="range" id="speedControl" min="0.1" max="2" step="0.1" value="0.3"><br>
-</div>
-<div class="textContainer">
-    <label for="sizeControl">이미지 크기 (%):</label>
-    <input type="range" id="sizeControl" min="10" max="100" step="1" value="15">
-</div>
+    <div class="controlsContainer">
+        <input type="file" id="imageInput" accept="image/*">
+        <button id="summonButton">소환</button>
+        <button id="summon100Button">100개 소환</button>
+        <button id="resetButton">다시 시작하기</button>
+        <input type="color" id="backgroundColorPicker" name="background-color">
+        
+        <!-- 속도 조절 라벨과 입력 요소 추가 -->
+        <label for="speedControl">이동 속도 조절:</label>
+        <input type="range" id="speedControl" min="0.1" max="2" step="0.1" value="0.5">
+        
+        <!-- 크기 조절 라벨과 입력 요소 추가 -->
+        <label for="sizeControl">이미지 크기 조절 (%):</label>
+        <input type="range" id="sizeControl" min="10" max="100" step="5" value="50">
+    </div>
+    
 
 <script>
    
@@ -64,7 +87,8 @@ document.getElementById('resetButton').addEventListener('click', function(event)
     images.forEach(img => img.remove());
 });
 document.addEventListener('click', function(event) {
-    if (event.target.matches('#imageInput, #summonButton, #speedControl, #resetButton, #sizeControl')) return;
+    // 컨트롤 패널 내의 클릭 이벤트 또는 지정된 컨트롤 요소의 클릭 이벤트는 무시
+    if (event.target.closest('.controlsContainer') || event.target.matches('#imageInput, #summonButton, #speedControl, #resetButton, #sizeControl, #summon100Button, #backgroundColorPicker')) return;
 
     const x = event.clientX;
     const y = event.clientY;
@@ -72,7 +96,7 @@ document.addEventListener('click', function(event) {
     // 이미지들을 클릭한 순간의 위치에 기반하여 정렬하고 각각에 대해 랜덤 오프셋 적용
     const images = document.querySelectorAll('.movableImage');
     images.forEach((img, index) => {
-        const offsetX = (index * Math.random() * 10+ 5); // 5px에서 20px 사이의 랜덤 오프셋 X
+        const offsetX = (index * Math.random() * 10 + 5); // 5px에서 20px 사이의 랜덤 오프셋 X
         const offsetY = (index * Math.random() * 10 + 5); // 5px에서 20px 사이의 랜덤 오프셋 Y
 
         // 각 이미지의 속도에 랜덤하게 ±0.1초의 차이를 줍니다.
@@ -83,7 +107,6 @@ document.addEventListener('click', function(event) {
         img.style.transform = `translate(${x + offsetX - window.innerWidth / 2}px, ${y + offsetY - window.innerHeight / 2}px)`;
     });
 });
-
 
 function moveImageTowards(img, x, y, index) {
     const speedAdjustment = Math.random() * 0.6 - 0.3;
