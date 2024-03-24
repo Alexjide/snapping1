@@ -38,8 +38,21 @@
             margin: 0 5px;
             font-size: 16px;
         }
-         /* 기존 스타일에 추가 */
-    .controlsContainer label {
+        .adBanner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #ffffe0; /* 눈에 띄는 배경색 */
+            color: #333; /* 글자색 */
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.2); /* 하단에 그림자 효과 */
+            z-index: 9; /* 컨트롤 박스 바로 아래 */
+        }
+
+        .controlsContainer {
+            top: 50px; /* 광고 배너 높이만큼 아래로 내리기 */
         margin-right: 10px; /* 라벨과 컨트롤 사이의 간격 조정 */
         font-size: 14px; /* 라벨의 폰트 크기 조정 */
     }
@@ -74,7 +87,13 @@
     </style>
 </head>
 <body>
-
+    <div class="adBanner">
+        <a href="https://wadiz.onelink.me/gmeA/97450d7j" target="_blank">디지털 드로잉의 시작 프로크리에이트 한국어 메뉴얼과 함께하세요! 절찬 펀딩중!</a>  
+    </div>
+    
+    < class="controlsContainer">
+        <!-- 컨트롤 요소들 ... -->
+    
     <div class="controlsContainer">
         <input type="file" id="imageInput" accept="image/*">
         <button id="summonButton">소환</button>
